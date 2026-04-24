@@ -1,0 +1,8 @@
+torch
+numpy
+pandas
+matplotlib
+PyYAML
+openpyxl
+# optional for real Mamba backend
+# mamba-ssm

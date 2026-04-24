@@ -1,0 +1,69 @@
+seed: 42
+data:
+  file_path: YOUR_PRIVATE_DATA.csv
+  file_type: auto
+  depth_col: null
+  well_id_col: null
+  feature_cols:
+  - PE
+  - DEN
+  - AC
+  - GR
+  - RS
+  - CNL
+  - M2R1
+  target_col: TOC
+  split_mode: random
+  train_ratio: 0.7
+  val_ratio: 0.15
+  test_ratio: 0.15
+  sort_by_depth: true
+  drop_boundary: true
+  enable_outlier_clip: true
+  outlier_method: iqr
+  smooth_enabled: false
+  smooth_window: 3
+  feature_scaler: standard
+  target_scaler: standard
+  num_workers: 0
+model:
+  window_length: 32
+  global_patch_len: 32
+  global_stride: 16
+  local_patch_len: 8
+  local_stride: 4
+  d_model: 64
+  num_heads: 4
+  local_layers: 1
+  dropout: 0.1
+  d_state: 16
+  d_conv: 4
+  expand: 2
+  use_mamba_backend: false
+  fuse_mode: sum
+  debug_shapes: false
+  use_global_branch: true
+  use_local_branch: true
+  bidirectional: true
+  use_cross_attention: true
+train:
+  batch_size: 4
+  epochs: 1
+  lr: 0.001
+  weight_decay: 0.0001
+  optimizer: adamw
+  loss: huber
+  early_stopping_patience: 15
+  scheduler: plateau
+  device: cpu
+  checkpoint_dir: checkpoints
+  output_dir: outputs
+  save_best_name: best_GeoScaleInv.pt
+ablation:
+  enabled: false
+  variants:
+  - full
+  - unidirectional
+  - no_cross_attention
+  - local_only
+  - global_only
